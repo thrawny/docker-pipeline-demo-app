@@ -1,3 +1,9 @@
+machine:
+  services:
+    - docker
+  python:
+    version: 3.5.2
+
 test:
   override:
     - pytest
@@ -5,3 +11,9 @@ test:
 dependencies:
   pre:
     - pip install -r web/requirements.txt
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - $TRIGGER_DOCKER_HUB_BUILD
