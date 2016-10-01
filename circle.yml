@@ -1,0 +1,7 @@
+test:
+  override:
+    - pytest
+
+dependencies:
+  pre:
+    - pip install -r web/requirements.txt
