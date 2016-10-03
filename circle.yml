@@ -1,19 +1,20 @@
 machine:
   services:
     - docker
-  python:
-    version: 3.5.1
+
+dependencies:
+  override:
+    - docker --version
+    - docker info
+    - docker build --rm=false -t thrawny/docker-pipeline-demo-app2 ./web
 
 test:
   override:
-    - pytest
-
-dependencies:
-  pre:
-    - pip install -r web/requirements.txt
+    - docker run thrawny/docker-pipeline-demo-app2 pytest
 
 deployment:
   hub:
     branch: master
     commands:
-      - "curl -H \"Content-Type: application/json\" --data '{\"build\": true}' -X POST $DOCKER_HUB_TRIGGER_URL"
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - docker push thrawny/docker-pipeline-demo-app2
