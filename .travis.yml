@@ -10,3 +10,9 @@ before_install:
 script:
   - docker run thrawny/docker-pipeline-demo-app2 pytest
 
+deploy:
+  skip_cleanup: false
+  provider: script
+  script: docker push thrawny/docker-pipeline-demo-app2
+  on:
+    branch: master
