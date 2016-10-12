@@ -2,7 +2,7 @@ version: '2'
 
 services:
   web:
-    image: thrawny/docker-pipeline-demo-app
+    image: thrawny/docker-pipeline-demo-app2
     environment:
       - FLASK_ENV=production
     command: "gunicorn -w 2 -b 0.0.0.0:5000 app_instance:app"

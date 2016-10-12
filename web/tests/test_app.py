@@ -20,3 +20,7 @@ class TestApp(TestCase):
     def test_response_content(self):
         resp = self.client.get('/')
         assert b'Hello World' in resp.data
+
+    def test_404(self):
+        resp = self.client.get('/does/not/exist')
+        assert resp.status_code == 404
